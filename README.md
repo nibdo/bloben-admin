@@ -1,1 +1,1 @@
-# bloben-admin
+# Admin page for Bloben app
