@@ -1,9 +1,12 @@
 import { AxiosResponse } from 'axios';
 import {
   Button,
+  Center,
   FormControl,
   FormLabel,
   Input,
+  InputGroup,
+  InputRightElement,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -25,6 +28,9 @@ const SettingsPage = (props: any) => {
 
   const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
+
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
 
   const onChange = (e: any) => {
     if (e.target.name === 'oldPassword') {
@@ -73,6 +79,7 @@ const SettingsPage = (props: any) => {
             <FormLabel size="2xl">Current password</FormLabel>
             <Input
               name={'oldPassword'}
+              type={show ? 'text' : 'password'}
               value={oldPassword}
               onChange={onChange}
             />
@@ -80,17 +87,32 @@ const SettingsPage = (props: any) => {
           <Separator height={20} />
           <FormControl id="password" size="2xl">
             <FormLabel size="2xl">Password</FormLabel>
-            <Input
-              type={'password'}
-              name={'password'}
-              value={password}
-              onChange={onChange}
-            />
+            <InputGroup>
+              <Input
+                type={show ? 'text' : 'password'}
+                name={'password'}
+                value={password}
+                onChange={onChange}
+              />
+              <InputRightElement width="4.5rem">
+                <Button
+                  _focus={{ boxShadow: 'none' }}
+                  h="1.75rem"
+                  size="sm"
+                  onClick={handleClick}
+                >
+                  {show ? 'Hide' : 'Show'}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
           </FormControl>
           <Separator height={40} />
-          <Button onClick={handleChangePassword} colorScheme="teal" size="md">
-            Confirm
-          </Button>
+          <Center>
+            <Button onClick={handleChangePassword} colorScheme="teal" size="md">
+              Confirm
+            </Button>
+          </Center>
+          <Separator height={16} />
         </ModalBody>
       </ModalContent>
     </Modal>

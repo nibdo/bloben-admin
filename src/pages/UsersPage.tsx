@@ -1,14 +1,16 @@
 import { AxiosResponse } from 'axios';
 import {
   Button,
+  Center,
   FormControl,
   FormLabel,
   Input,
+  InputGroup,
+  InputRightElement,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   useToast,
@@ -29,6 +31,9 @@ const UsersPage = () => {
   const [users, setUsers] = useState<GetUsersResponse[]>([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
 
   const getUsers = async (): Promise<void> => {
     try {
@@ -126,22 +131,42 @@ const UsersPage = () => {
           <ModalBody>
             <FormControl id="username" size="2xl">
               <FormLabel size="2xl">Username</FormLabel>
-              <Input name={'username'} value={username} onChange={onChange} />
+              <Input
+                size="lg"
+                name={'username'}
+                value={username}
+                onChange={onChange}
+              />
             </FormControl>
             <Separator height={20} />
             <FormControl id="password" size="2xl">
               <FormLabel size="2xl">Password</FormLabel>
-              <Input
-                type={'password'}
-                name={'password'}
-                value={password}
-                onChange={onChange}
-              />
+              <InputGroup size={'lg'}>
+                <Input
+                  size="lg"
+                  type={show ? 'text' : 'password'}
+                  name={'password'}
+                  value={password}
+                  onChange={onChange}
+                />
+                <InputRightElement width="4.5rem">
+                  <Button
+                    _focus={{ boxShadow: 'none' }}
+                    h="1.75rem"
+                    size="sm"
+                    onClick={handleClick}
+                  >
+                    {show ? 'Hide' : 'Show'}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
             </FormControl>
           </ModalBody>
-          <ModalFooter>
+          <Separator height={20} />
+          <Center>
             <Button onClick={handleCreate}>Confirm</Button>
-          </ModalFooter>
+          </Center>
+          <Separator height={20} />
         </ModalContent>
       </Modal>
     </>
