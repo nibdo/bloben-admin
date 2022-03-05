@@ -5,9 +5,11 @@ import {
   FormControl,
   FormLabel,
   Input,
+  InputGroup,
+  InputRightElement,
 } from '@chakra-ui/react';
 import { Heading } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import Separator from './Separator';
 
 interface LoginViewProps {
@@ -19,6 +21,9 @@ interface LoginViewProps {
 }
 const LoginView = (props: LoginViewProps) => {
   const { username, password, onChange, serverUrl, handleLogin } = props;
+
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
 
   return (
     <div
@@ -37,22 +42,40 @@ const LoginView = (props: LoginViewProps) => {
         <Separator />
         <FormControl id="username" size="2xl">
           <FormLabel size="2xl">Username</FormLabel>
-          <Input name={'username'} value={username} onChange={onChange} />
+          <Input
+            size="lg"
+            name={'username'}
+            value={username}
+            onChange={onChange}
+          />
         </FormControl>
         <Separator height={20} />
         <FormControl id="password" size="2xl">
           <FormLabel size="2xl">Password</FormLabel>
-          <Input
-            type={'password'}
-            name={'password'}
-            value={password}
-            onChange={onChange}
-          />
+          <InputGroup size={'lg'}>
+            <Input
+              type={show ? 'text' : 'password'}
+              name={'password'}
+              value={password}
+              onChange={onChange}
+            />
+            <InputRightElement width="4.5rem">
+              <Button
+                _focus={{ boxShadow: 'none' }}
+                h="1.75rem"
+                size="sm"
+                onClick={handleClick}
+              >
+                {show ? 'Hide' : 'Show'}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
         </FormControl>
         <Separator height={40} />
         <FormControl id="serverUrl" size="2xl">
           <FormLabel size="2xl">Url</FormLabel>
           <Input
+            size="lg"
             type={'serverUrl'}
             name={'serverUrl'}
             value={serverUrl}
