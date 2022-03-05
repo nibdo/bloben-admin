@@ -1,5 +1,11 @@
+import { APP_PATH } from '../data/enums';
+import { AxiosResponse } from 'axios';
 import { Button } from '@chakra-ui/react';
-import React from 'react';
+import { CommonResponse } from 'bloben-interface/interface';
+import { Context } from '../context/store';
+import { useHistory } from 'react-router';
+import AdminApi from '../api/admin.api';
+import React, { useContext } from 'react';
 import Separator from './Separator';
 
 const navigationStyle: any = {
@@ -12,22 +18,54 @@ const navigationStyle: any = {
 };
 
 const Navigation = () => {
-  // const history = useHistory();
+  const history = useHistory();
 
-  // const navigateTo = (path: APP_PATH) => {
-  //   history.push(`/admin/${path}`);
-  // };
+  const navigateTo = (path: APP_PATH) => {
+    history.push(`/admin/${path}`);
+  };
+  const [store, dispatch] = useContext(Context);
+
+  const setContext = (type: string, payload: any) => {
+    dispatch({ type, payload });
+  };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleLogout = async () => {
+    const response: AxiosResponse<CommonResponse> = await AdminApi.logout(
+      store.token
+    );
+
+    if (response.status === 200) {
+      setContext('isLogged', false);
+    }
+  };
 
   return (
     <div style={navigationStyle}>
       <Button
         onClick={() => {
-          return;
+          navigateTo(APP_PATH.USERS);
         }}
         colorScheme="teal"
       >
-        {/*<Button onClick={() => navigateTo(APP_PATH.USERS)} colorScheme="teal">*/}
         Users
+      </Button>
+      <Separator height={16} />
+      <Button
+        onClick={() => {
+          navigateTo(APP_PATH.LOGS);
+        }}
+        colorScheme="teal"
+      >
+        Logs
+      </Button>
+      <Separator height={16} />
+      <Button
+        onClick={() => {
+          navigateTo(APP_PATH.SETTINGS);
+        }}
+        colorScheme="teal"
+      >
+        Settings
       </Button>
       <Separator height={16} />
     </div>

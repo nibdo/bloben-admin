@@ -108,6 +108,7 @@ const UsersPage = () => {
 
   return (
     <>
+      <Separator height={16} />
       <UsersView
         users={users}
         handleEnabledStatusChange={handleEnabledStatusChange}
