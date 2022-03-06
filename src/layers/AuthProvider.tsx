@@ -1,11 +1,9 @@
 import { Context } from '../context/store';
 import { Flex, Spacer, useToast } from '@chakra-ui/react';
-import { Route } from 'react-router-dom';
 import AdminApi from '../api/admin.api';
 import LayoutProvider from './LayoutLayer';
 import LoginPage from '../pages/LoginPage';
 import React, { useContext, useEffect } from 'react';
-import VersionFooter from '../components/versionFooter/VersionFooter';
 
 const AuthProvider = () => {
   const toast = useToast();
@@ -61,19 +59,16 @@ const AuthProvider = () => {
   }, []);
 
   return (
-    <Route path={'/admin'}>
-      <Flex
-        height={'100%'}
-        direction={'column'}
-        justifyContent={'center'}
-        alignItems={'center'}
-        paddingBottom={16}
-      >
-        {!isLogged ? <LoginPage /> : <LayoutProvider />}
-        <Spacer />
-        <VersionFooter />
-      </Flex>
-    </Route>
+    <Flex
+      height={'100%'}
+      direction={'column'}
+      justifyContent={'center'}
+      alignItems={'center'}
+    >
+      {!isLogged ? <LoginPage /> : <LayoutProvider />}
+      <Spacer />
+      {/*<VersionFooter />*/}
+    </Flex>
   );
 };
 
