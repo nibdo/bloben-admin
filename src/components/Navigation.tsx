@@ -67,6 +67,16 @@ const Navigation = () => {
       >
         Settings
       </Button>
+      <Separator height={40} />
+
+      <Button
+        onClick={() => {
+          handleLogout();
+        }}
+        colorScheme="gray"
+      >
+        Log out
+      </Button>
       <Separator height={16} />
     </div>
   );
