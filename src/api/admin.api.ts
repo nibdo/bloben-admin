@@ -53,6 +53,12 @@ const AdminApi = {
   ): Promise<AxiosResponse<CommonResponse>> => {
     return Axios.patch(`${V1_BASE_PATH}/users/${id}`, data, token);
   },
+  deleteUser: async (
+    id: string,
+    token: string
+  ): Promise<AxiosResponse<CommonResponse>> => {
+    return Axios.delete(`${V1_BASE_PATH}/users/${id}`, undefined, token);
+  },
   getVersion: async () => {
     return Axios.get(`/v1/version`);
   },

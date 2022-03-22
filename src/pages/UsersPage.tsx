@@ -111,6 +111,7 @@ const UsersPage = () => {
       <Separator height={16} />
       <UsersView
         users={users}
+        getUsers={getUsers}
         handleEnabledStatusChange={handleEnabledStatusChange}
         handleChangeRole={handleChangeRole}
       />
