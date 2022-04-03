@@ -1,6 +1,6 @@
 {
   "name": "bloben-admin",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "author": "nibdo",
   "license": "GPL",
   "private": false,
@@ -48,7 +48,7 @@
   },
   "scripts": {
     "prepare": "npx husky install && npx husky add .husky/pre-commit \"npm run lint\"",
-    "start": "BROWSER=none PORT=4103 react-scripts start",
+    "start": "REACT_APP_NODE_ENV=development BROWSER=none PORT=4103 react-scripts start",
     "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "compile": "tsc",
     "test": "react-scripts test",
