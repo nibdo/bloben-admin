@@ -15,12 +15,11 @@ import Separator from './Separator';
 interface LoginViewProps {
   username: string;
   password: string;
-  serverUrl: string;
   onChange: any;
   handleLogin: any;
 }
 const LoginView = (props: LoginViewProps) => {
-  const { username, password, onChange, serverUrl, handleLogin } = props;
+  const { username, password, onChange, handleLogin } = props;
 
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -70,17 +69,6 @@ const LoginView = (props: LoginViewProps) => {
               </Button>
             </InputRightElement>
           </InputGroup>
-        </FormControl>
-        <Separator height={40} />
-        <FormControl id="serverUrl" size="2xl">
-          <FormLabel size="2xl">Url</FormLabel>
-          <Input
-            size="lg"
-            type={'serverUrl'}
-            name={'serverUrl'}
-            value={serverUrl}
-            onChange={onChange}
-          />
         </FormControl>
         <Separator height={40} />
         <Center>
