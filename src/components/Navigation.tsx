@@ -65,10 +65,18 @@ const Navigation = () => {
         }}
         colorScheme="teal"
       >
-        Settings
+        Admin Settings
+      </Button>
+      <Separator height={16} />
+      <Button
+        onClick={() => {
+          navigateTo(APP_PATH.SERVER_SETTINGS);
+        }}
+        colorScheme="teal"
+      >
+        Server settings
       </Button>
       <Separator height={40} />
-
       <Button
         onClick={() => {
           handleLogout();
