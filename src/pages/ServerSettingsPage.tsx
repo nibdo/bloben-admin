@@ -1,5 +1,13 @@
 import { AxiosResponse } from 'axios';
-import { Checkbox, Flex, Text, useToast } from '@chakra-ui/react';
+import {
+  Checkbox,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Text,
+  useToast,
+} from '@chakra-ui/react';
 import { CommonResponse } from 'bloben-interface/interface';
 import { Context } from '../context/store';
 import React, { useContext, useEffect, useState } from 'react';
@@ -46,6 +54,28 @@ const ServerSettingsPage = () => {
     }
   };
 
+  const handleChangeEmailCounter = async (e: any) => {
+    try {
+      const response: AxiosResponse<CommonResponse> =
+        await ServerSettingsApi.patch(store.token, {
+          emailCounter: e.target.value,
+        });
+
+      if (response.status === 200) {
+        toast({ title: response.data?.message });
+
+        getServerSettings();
+      }
+    } catch (e: any) {
+      if (e.response?.data?.message) {
+        toast({
+          title: e.response?.data?.message,
+          status: 'error',
+        });
+      }
+    }
+  };
+
   return (
     <Flex direction={'column'} padding={24} maxWidth={'50%'}>
       <Separator height={24} />
@@ -62,6 +92,16 @@ const ServerSettingsPage = () => {
           about updates in regular intervals
         </Text>
       </Flex>
+      <Separator height={24} />
+      <FormControl id="emailCounter" size="2xl">
+        <FormLabel size="2xl">Email daily limit</FormLabel>
+        <Input
+          size="lg"
+          name={'emailCounter'}
+          value={serverSettings.emailCounter}
+          onChange={(e: any) => handleChangeEmailCounter(e)}
+        />
+      </FormControl>
     </Flex>
   );
 };
