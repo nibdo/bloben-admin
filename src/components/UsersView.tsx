@@ -27,48 +27,61 @@ import React, { useContext, useState } from 'react';
 const renderUsers = (
   users: GetUsersResponse[],
   handleEnabledStatusChange: any,
+  handleEmailsAllowedChange: any,
   handleChangeRole: any,
   deleteUser: any
 ) => {
-  return users?.map((user: GetUsersResponse) => {
-    return (
-      <Tr key={user.id}>
-        <Td>{user.username}</Td>
-        <Td>
-          <Menu>
-            <MenuButton as={Button} disabled={user.role === 'ADMIN'}>
-              {user.role}
-            </MenuButton>
-            <MenuList>
-              <MenuItem onClick={() => handleChangeRole(user, 'DEMO')}>
-                {'DEMO'}
-              </MenuItem>
-              <MenuItem onClick={() => handleChangeRole(user, 'USER')}>
-                {'USER'}
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        </Td>
-        <Td>
-          <Checkbox
-            onChange={() => handleEnabledStatusChange(user)}
-            isChecked={user.isEnabled}
-            disabled={user.role === 'ADMIN'}
-          />
-          {user.isEnabled}
-        </Td>
-        <Td>
-          <Button
-            onClick={() => deleteUser(user)}
-            disabled={user.role === 'ADMIN'}
-            colorScheme={'red'}
-          >
-            Delete
-          </Button>
-        </Td>
-      </Tr>
-    );
-  });
+  return users
+    ?.sort((a, b) => {
+      return a.username.localeCompare(b.username);
+    })
+    .map((user: GetUsersResponse) => {
+      return (
+        <Tr key={user.id}>
+          <Td>{user.username}</Td>
+          <Td>
+            <Menu>
+              <MenuButton as={Button} disabled={user.role === 'ADMIN'}>
+                {user.role}
+              </MenuButton>
+              <MenuList>
+                <MenuItem onClick={() => handleChangeRole(user, 'DEMO')}>
+                  {'DEMO'}
+                </MenuItem>
+                <MenuItem onClick={() => handleChangeRole(user, 'USER')}>
+                  {'USER'}
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </Td>
+          <Td>
+            <Checkbox
+              onChange={() => handleEnabledStatusChange(user)}
+              isChecked={user.isEnabled}
+              disabled={user.role === 'ADMIN'}
+            />
+            {user.isEnabled}
+          </Td>
+          <Td>
+            <Checkbox
+              onChange={() => handleEmailsAllowedChange(user)}
+              isChecked={user.emailsAllowed}
+              disabled={user.role === 'ADMIN' || user.role === 'DEMO'}
+            />
+            {user.emailsAllowed}
+          </Td>
+          <Td>
+            <Button
+              onClick={() => deleteUser(user)}
+              disabled={user.role === 'ADMIN'}
+              colorScheme={'red'}
+            >
+              Delete
+            </Button>
+          </Td>
+        </Tr>
+      );
+    });
 };
 
 interface UsersViewProps {
@@ -76,17 +89,24 @@ interface UsersViewProps {
   handleEnabledStatusChange: any;
   handleChangeRole: any;
   getUsers: any;
+  handleEmailsAllowedChange: any;
 }
 const UsersView = (props: UsersViewProps) => {
   const toast = useToast();
   const [store] = useContext(Context);
 
   const [selectedUser, selectUser] = useState<null | GetUsersResponse>(null);
-  const { users, handleEnabledStatusChange, handleChangeRole } = props;
+  const {
+    users,
+    handleEnabledStatusChange,
+    handleEmailsAllowedChange,
+    handleChangeRole,
+  } = props;
 
   const renderedUsers: any = renderUsers(
     users,
     handleEnabledStatusChange,
+    handleEmailsAllowedChange,
     handleChangeRole,
     selectUser
   );
@@ -125,6 +145,7 @@ const UsersView = (props: UsersViewProps) => {
           <Th>username</Th>
           <Th>role</Th>
           <Th>is enabled</Th>
+          <Th>emails allowed</Th>
         </Tr>
       </Thead>
       <Tbody>{renderedUsers}</Tbody>

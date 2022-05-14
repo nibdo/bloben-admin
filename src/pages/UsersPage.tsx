@@ -56,7 +56,16 @@ const UsersPage = () => {
   const handleEnabledStatusChange = async (user: GetUsersResponse) => {
     await AdminApi.updateUser(
       user.id,
-      { isEnabled: !user.isEnabled },
+      { isEnabled: !user.isEnabled, emailsAllowed: user.emailsAllowed },
+      store.token
+    );
+    await getUsers();
+  };
+
+  const handleEmailsAllowedChange = async (user: GetUsersResponse) => {
+    await AdminApi.updateUser(
+      user.id,
+      { isEnabled: user.isEnabled, emailsAllowed: !user.emailsAllowed },
       store.token
     );
     await getUsers();
@@ -65,7 +74,7 @@ const UsersPage = () => {
   const handleChangeRole = async (user: GetUsersResponse, role: ROLE) => {
     await AdminApi.updateUser(
       user.id,
-      { role, isEnabled: user.isEnabled },
+      { role, isEnabled: user.isEnabled, emailsAllowed: user.emailsAllowed },
       store.token
     );
     await getUsers();
@@ -114,6 +123,7 @@ const UsersPage = () => {
         getUsers={getUsers}
         handleEnabledStatusChange={handleEnabledStatusChange}
         handleChangeRole={handleChangeRole}
+        handleEmailsAllowedChange={handleEmailsAllowedChange}
       />
       <div style={{ position: 'fixed', bottom: 50, right: 50 }}>
         <Button
