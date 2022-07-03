@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import { Button } from '@chakra-ui/react';
 import { CommonResponse } from 'bloben-interface/interface';
 import { Context } from '../context/store';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import AdminApi from '../api/admin.api';
 import React, { useContext } from 'react';
 import Separator from './Separator';
@@ -18,10 +18,10 @@ const navigationStyle: any = {
 };
 
 const Navigation = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const navigateTo = (path: APP_PATH) => {
-    history.push(`/admin/${path}`);
+    navigate(`/admin/${path}`);
   };
   const [store, dispatch] = useContext(Context);
 
