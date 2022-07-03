@@ -1,4 +1,4 @@
-import { Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import LogsPage from '../pages/LogsPage';
 import React from 'react';
 import ServerSettingsPage from '../pages/ServerSettingsPage';
@@ -7,15 +7,12 @@ import UsersPage from '../pages/UsersPage';
 
 const RouterProvider = () => {
   return (
-    <>
-      <Route path={'/admin/logs'} component={() => <LogsPage />} />
-      <Route path={'/admin/users'} component={() => <UsersPage />} />
-      <Route path={'/admin/settings'} component={() => <SettingsPage />} />
-      <Route
-        path={'/admin/server-settings'}
-        component={() => <ServerSettingsPage />}
-      />
-    </>
+    <Routes>
+      <Route path={'/admin/logs'} element={<LogsPage />} />
+      <Route path={'/admin/users'} element={<UsersPage />} />
+      <Route path={'/admin/settings'} element={<SettingsPage />} />
+      <Route path={'/admin/server-settings'} element={<ServerSettingsPage />} />
+    </Routes>
   );
 };
 
