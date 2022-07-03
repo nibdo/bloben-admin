@@ -154,6 +154,7 @@ const UsersView = (props: UsersViewProps) => {
         <AlertDialog
           isOpen={selectedUser?.username !== undefined}
           onClose={handleClose}
+          // @ts-ignore
           leastDestructiveRef={undefined}
           isCentered={true}
         >
