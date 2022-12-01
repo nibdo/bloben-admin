@@ -16,7 +16,7 @@
     "@chakra-ui/react": "2.3.6",
     "@emotion/react": "11.10.5",
     "@emotion/styled": "11.10.5",
-    "axios": "1.1.3",
+    "axios": "1.2.0",
     "bloben-components": "0.0.8",
     "bloben-interface": "0.0.18",
     "buffer": "6.0.3",
