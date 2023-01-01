@@ -34,7 +34,7 @@
     "uuid": "9.0.0"
   },
   "devDependencies": {
-    "@types/jest": "29.2.3",
+    "@types/jest": "29.2.5",
     "@types/luxon": "3.1.0",
     "@types/node": "18.11.10",
     "@types/qrcode": "1.5.0",
