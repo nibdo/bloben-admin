@@ -23,7 +23,7 @@
     "history": "5.3.0",
     "ical-js-parser": "0.7.2",
     "kalend": "0.17.4",
-    "luxon": "3.1.1",
+    "luxon": "3.2.0",
     "otplib": "12.0.1",
     "qrcode": "1.5.1",
     "react": "18.2.0",
@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@types/jest": "29.2.3",
-    "@types/luxon": "3.1.0",
+    "@types/luxon": "3.2.0",
     "@types/node": "18.11.10",
     "@types/qrcode": "1.5.0",
     "@types/react": "18.0.26",
